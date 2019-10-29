@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
-using WalkingPeople.Scripts.MVC;
-using WalkingPeople.Scripts.MVC.Observer;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
 using Random = UnityEngine.Random;
 
 namespace WalkingPeople.Scripts.Level
 {
     public class LevelBuilder : MonoBehaviour, IObservable
     {
-        [SerializeField] private float Scatter = 1f;
         [SerializeField] private int CountUnits;
         [SerializeField] private float SpawnRate = 1f;
-        [SerializeField] private FactoryUnits _factory;
+        [SerializeField] private FactoryUnits Factory;
         [SerializeField] private int AllowedMissUnits = 3;
-        private float _leftPoint, _rightPoint, _topPoint;
+
+        private float _leftPoint, _rightPoint, _topPoint, _scatter;
         private GameModel _gameModel;
         private IEnumerator _coroutineLoop;
 
@@ -25,25 +25,31 @@ namespace WalkingPeople.Scripts.Level
 
         private void Start()
         {
-            _rightPoint = _gameModel.RightBorder - Scatter;
-            _topPoint = _gameModel.TopBorder + Scatter;
+            _scatter = _gameModel.Scater;
+            
+            _rightPoint = _gameModel.RightBorder - _scatter;
+            _topPoint = _gameModel.TopBorder + _scatter;
             _leftPoint = _rightPoint * -1;
+            
             _gameModel.SetCountUnits(CountUnits);
-            StartCoroutine(_coroutineLoop = LoopSpawnUnits());
             _gameModel.SetPermissiveMisUnits(AllowedMissUnits);
+
+            StartCoroutine(_coroutineLoop = LoopSpawnUnits());
         }
 
         private IEnumerator LoopSpawnUnits()
         {
             for (var i = 0; i < CountUnits; i++)
             {
-                var RandomPosition = new Vector3(UnityEngine.Random.Range(_leftPoint, _rightPoint), _topPoint, 0f);
-                var rnd = Random.Range(1, 4);
-                _factory.GetUnit((FactoryUnits.TypeUnit) rnd, RandomPosition);
+                var randomPosition = new Vector3(Random.Range(_leftPoint, _rightPoint), _topPoint, 0f);
+                
+                // I don't know, but if set Range (1, 3), number 3 - never appeared. If maxCount = x, that real maxCount = x-1;
+                int rnd = Random.Range(1, 4);
+                Factory.GetUnit((FactoryUnits.TypeUnit) rnd, randomPosition);
                 yield return new WaitForSeconds(SpawnRate);
             }
         }
-
+        
         private void OnDestroy()
         {
             StopCoroutine(_coroutineLoop);

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 897387499044634740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 4406328663454753560}
   m_RootOrder: 0
@@ -156,7 +156,7 @@ Transform:
   m_GameObject: {fileID: 1974471609696650265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 3, y: 3, z: 0}
   m_Children:
   - {fileID: 7426944095283111252}
   m_Father: {fileID: 0}
@@ -202,11 +202,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   TimeChangeDirection: 2
+  PlayerAnimation: {fileID: 2596612838289729038}
   Directions:
   - {x: 0, y: -1, z: 0}
   - {x: 1, y: -1, z: 0}
   - {x: -1, y: -1, z: 0}
-  PlayerAnimation: {fileID: 2596612838289729038}
 --- !u!114 &4574333563471001527
 MonoBehaviour:
   m_ObjectHideFlags: 0

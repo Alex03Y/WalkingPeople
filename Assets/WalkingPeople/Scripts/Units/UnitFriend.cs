@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
-using WalkingPeople.Scripts.MVC;
-using WalkingPeople.Scripts.Pool;
-using WalkingPeople.Scripts.Units.States;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.Pool;
+using WalkingPeople.Scripts.StatesLogic;
 using WalkingPeople.Scripts.Utilits;
 using Random = UnityEngine.Random;
 
@@ -12,16 +13,15 @@ namespace WalkingPeople.Scripts.Units
     {
         [SerializeField] private float Speed;
         [SerializeField] private float TimeChangeDirection = 1f;
+        [SerializeField] private SpriteSheetPlayer PlayerAnimation;
         [SerializeField] private Vector3[] Directions = 
             {new Vector3(0f, -1f, 0f), new Vector3(-1f, -1f, 0f), new Vector3(1f, -1f, 0f)};
-
-        [SerializeField] private SpriteSheetPlayer PlayerAnimation;
-        [SerializeField] private float Scatter = 0.5f;
+       
         private GameModel _gameModel;
         private PoolObject _poolObject;
         private Vector3 _currentDirection;
         private IEnumerator _choiceDirection;
-        private float _borderPosition = 11f;
+        private float _scatter, _borderPosition;
 
 
         public void OnAwake(PoolObject poolObject)
@@ -31,7 +31,12 @@ namespace WalkingPeople.Scripts.Units
             _poolObject = poolObject;
             _currentDirection = Directions[0];
             _choiceDirection = NextDirection();
-            _borderPosition = _gameModel.RightBorder - Scatter;
+        }
+
+        private void Start()
+        {
+            _scatter = _gameModel.Scater;
+            _borderPosition = _gameModel.RightBorder - _scatter;
         }
 
         private void Update()
@@ -41,11 +46,13 @@ namespace WalkingPeople.Scripts.Units
                 case State.Move :
                     MoveToDirection();
                     break;
+                
                 case State.OnClick :
                     _gameModel.EndGame(false);
                     _gameModel.SetChanged();
                     OnDisposeObject();
                     break;
+                
                 case State.OutOfScreen :
                     OnDisposeObject();
                     break;
@@ -56,8 +63,10 @@ namespace WalkingPeople.Scripts.Units
         {
             var currentPosition = transform.position;
             var nextPosition = new Vector3(currentPosition.x, currentPosition.y, 0f);
+            
             nextPosition += Time.deltaTime * Speed * _currentDirection;
             nextPosition = new Vector3(Mathf.Clamp(nextPosition.x, -_borderPosition, _borderPosition), nextPosition.y,0f); 
+            
             transform.position = nextPosition;
         }
 
@@ -66,6 +75,7 @@ namespace WalkingPeople.Scripts.Units
             while (true)
             {
                 yield return new WaitForSeconds(TimeChangeDirection);
+                
                 var rnd = Random.Range(0, 3);
                 _currentDirection = Directions[rnd].normalized;
                 PlayerAnimation.SetState(rnd);
@@ -83,7 +93,7 @@ namespace WalkingPeople.Scripts.Units
         {
             PlayerAnimation.StopAnimation();
             StopCoroutine(_choiceDirection);
-            PoolManager._instance.DisposePoolObject(_poolObject);
+            PoolManager.instance.DisposePoolObject(_poolObject);
         }
     }
 }

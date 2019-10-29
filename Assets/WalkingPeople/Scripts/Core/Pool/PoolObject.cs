@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace WalkingPeople.Scripts.Pool
+namespace WalkingPeople.Scripts.Core.Pool
 {
     [Serializable]
     public class PoolObject

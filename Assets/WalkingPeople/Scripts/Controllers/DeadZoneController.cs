@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using WalkingPeople.Scripts.MVC;
-using WalkingPeople.Scripts.Units.States;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.StatesLogic;
 
 namespace WalkingPeople.Scripts.Controllers
 {
@@ -8,31 +8,36 @@ namespace WalkingPeople.Scripts.Controllers
     {
         [SerializeField] private EdgeCollider2D ZoneCollider2D;
         [SerializeField] private Camera Camera;
+        
         private GameModel _gameModel;
-    
-
+        private float _scatter;
+        
         //Paint a collider for dead zone;
         private void Awake()
         {
             _gameModel = GameModel.Instance();
+            _scatter = _gameModel.Scater;
+            
             GetPointsScreen(out var screenPoints);
             ConversionPointsToWorld(ref screenPoints);
-            ZoneCollider2D.points = new Vector2[] {screenPoints[0], screenPoints[1]};
+            var offset = new Vector2(0f, -2 - _scatter);
+            ZoneCollider2D.points = new[] {screenPoints[0] + offset, screenPoints[1] + offset};
             _gameModel.SetBorder(screenPoints[1].x, screenPoints[2].y);
-            Debug.Log("x = "+ screenPoints[1].x + " y = " + screenPoints[2].y);
         }
         
-        // If player lose
+        // If player missed unit
         private void OnTriggerEnter2D(Collider2D other)
         {
+            //// todo: "create dictionary for storing objects and search by hash code for a constant time.
+            //// todo: make СacheComponent<> in PoolObj, for opportunity don't used GetComponent<>."
             if (other != null) other.GetComponent<StateChange>().OutOfScreen();
         }
         
         private void GetPointsScreen(out Vector2[] points)
         {
             points = new Vector2[3];
-            points[0] = new Vector2(0, 0); 
-            points[1] = new Vector2(Screen.width, 0);
+            points[0] = new Vector2(0, 0f); 
+            points[1] = new Vector2(Screen.width, 0f);
             points[2] = new Vector2(0, Screen.height);
         }
 

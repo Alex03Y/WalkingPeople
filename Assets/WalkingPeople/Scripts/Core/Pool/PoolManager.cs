@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WalkingPeople.Scripts.Pool
+namespace WalkingPeople.Scripts.Core.Pool
 {
     public class PoolManager : MonoBehaviour
     {
         
-        public static PoolManager _instance { get; private set; }
+        public static PoolManager instance { get; private set; }
 
         private void Awake()
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = this;
+                instance = this;
             }
         }
 

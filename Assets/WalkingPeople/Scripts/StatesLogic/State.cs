@@ -1,4 +1,4 @@
-namespace WalkingPeople.Scripts.Units.States
+namespace WalkingPeople.Scripts.StatesLogic
 {
     public enum State
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using WalkingPeople.Scripts.MVC;
-using WalkingPeople.Scripts.Pool;
-using WalkingPeople.Scripts.Units.States;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.Pool;
+using WalkingPeople.Scripts.StatesLogic;
 using WalkingPeople.Scripts.Utilits;
 
 namespace WalkingPeople.Scripts.Units
@@ -11,6 +11,7 @@ namespace WalkingPeople.Scripts.Units
         [SerializeField] private float Speed;
         [SerializeField] private Vector3 Direction = new Vector3(0f, -1f, 0f); 
         [SerializeField] private SpriteSheetPlayer PlayerAnimation;
+       
         private GameModel _gameModel;
         private PoolObject _poolObject;
         
@@ -28,11 +29,13 @@ namespace WalkingPeople.Scripts.Units
                 case State.Move :
                     MoveForward();
                     break;
+                
                 case State.OnClick :
                     _gameModel.AddScore();
                     _gameModel.SetChanged();
                     OnDisposeObject();
                     break;
+                
                 case State.OutOfScreen :
                     _gameModel.MissedUnit();
                     _gameModel.SetChanged();
@@ -45,7 +48,8 @@ namespace WalkingPeople.Scripts.Units
         {
             var currentPosition = transform.position;
             var nextPosition = new Vector3(currentPosition.x, currentPosition.y, 0f);
-            nextPosition += Time.deltaTime * Speed * Direction;
+            
+            nextPosition += (Time.deltaTime * Speed) * Direction;
             transform.position = nextPosition;
         }
         
@@ -58,7 +62,7 @@ namespace WalkingPeople.Scripts.Units
         public void OnDisposeObject()
         {
             PlayerAnimation.StopAnimation();
-            PoolManager._instance.DisposePoolObject(_poolObject);
+            PoolManager.instance.DisposePoolObject(_poolObject);
         }
     }
 }

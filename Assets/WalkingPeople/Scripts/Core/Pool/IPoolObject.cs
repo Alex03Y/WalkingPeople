@@ -1,4 +1,4 @@
-namespace WalkingPeople.Scripts.Pool
+namespace WalkingPeople.Scripts.Core.Pool
 {
     public interface IPoolObject
     {

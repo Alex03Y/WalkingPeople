@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using WalkingPeople.Scripts.MVC;
-using WalkingPeople.Scripts.MVC.Observer;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
 
 namespace WalkingPeople.Scripts.GUI
 {
@@ -12,7 +12,9 @@ namespace WalkingPeople.Scripts.GUI
     {
         [SerializeField] private Button Replay;
         [SerializeField] private TextMeshProUGUI Score;
-        [SerializeField] private float Duration = 0.5f;
+        [SerializeField] private Image Vignette;
+        [SerializeField] private float DurationForPopup = 0.5f, DurationForVignette = 0.35f;
+        [SerializeField] private AnimationCurve CurveForPopup;
 
         private GameModel _gameModel;
 
@@ -20,6 +22,7 @@ namespace WalkingPeople.Scripts.GUI
         {
             Time.timeScale = 1f;
             transform.localScale = Vector3.zero;
+            Vignette.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -32,11 +35,21 @@ namespace WalkingPeople.Scripts.GUI
             });
         }
 
+        private void ShowVignette()
+        {
+            var color = Color.black;
+            color.a *= 0f;
+            Vignette.color = color;
+            Vignette.gameObject.SetActive(true);
+        
+            DOTween.ToAlpha(() => Vignette.color, x => Vignette.color = x, 0.5f, DurationForVignette)
+                .OnComplete(() => ShowPopup());
+            Time.timeScale = 0f;
+        }
         private void ShowPopup()
         {
             Score.text = "Score: " + _gameModel.Score;
-            transform.DOScale(Vector3.one, Duration);
-            Time.timeScale = 0f;
+            transform.DOScale(Vector3.one, DurationForPopup).SetEase(CurveForPopup);
         }
 
         private void OnDestroy()
@@ -49,7 +62,7 @@ namespace WalkingPeople.Scripts.GUI
         {
             if (_gameModel.Score == _gameModel.CountUnits) _gameModel.EndGame(true);
             if (_gameModel.NotMissingUnits == 0) _gameModel.EndGame(false);
-            if (_gameModel.GameEnd != GameEndResult.NotEnded) ShowPopup();
+            if (_gameModel.GameEnd != GameEndResult.NotEnded) ShowVignette();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace WalkingPeople.Scripts.MVC.Observer
+namespace WalkingPeople.Scripts.Core.MVC.ObserverLogic
 {
     public class Observer : IObserver
     {

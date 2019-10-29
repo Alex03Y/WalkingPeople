@@ -1,15 +1,20 @@
 ﻿using System;
+using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
 
-namespace WalkingPeople.Scripts.MVC
+namespace WalkingPeople.Scripts.Core.MVC
 {
-    public class GameModel :  Observer.Observer
+    public class GameModel :  Observer
     {
-//    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-//    public static void Register()
-//    {
-//        ServiceLocator.Register(typeof(GameModel), new GameModel());
-//    }
+        public GameEndResult GameEnd { get; private set; }
+        public int CountUnits { get; private set; }
+        public int Score { get; private set; }
+        public int NotMissingUnits { get; private set; }
+        public float RightBorder { get; private set; }
+        public float TopBorder { get; private set; }
+        public float Scater { get; private set; }
+
         private static GameModel _instance;
+
         public static GameModel Instance()
         {
             if (_instance == null)
@@ -25,15 +30,6 @@ namespace WalkingPeople.Scripts.MVC
             _instance = null;
         }
 
-        public GameEndResult GameEnd { get; private set; }
-        public int CountUnits { get; private set; }
-        public int Score { get; private set; }
-        public float RightBorder { get; private set; }
-        public float TopBorder { get; private set; }
-        public int NotMissingUnits { get; private set; }
-
-
-    
         public void EndGame(bool winner)
         {
             GameEnd = winner ? GameEndResult.Winner : GameEndResult.Looser;
@@ -65,12 +61,10 @@ namespace WalkingPeople.Scripts.MVC
         {
             NotMissingUnits--;
         }
-    }
 
-    public enum GameEndResult
-    {
-        NotEnded,
-        Winner,
-        Looser
+        public void SetScatter(float count)
+        {
+            Scater = count;
+        }
     }
 }

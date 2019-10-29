@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using WalkingPeople.Scripts.Units.States;
+using WalkingPeople.Scripts.StatesLogic;
 
 namespace WalkingPeople.Scripts.Controllers
 {
@@ -17,11 +17,17 @@ namespace WalkingPeople.Scripts.Controllers
                 var worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
                 var hitInfo = Physics2D.Raycast(worldPoint, Vector2.zero, 2f, _layer);
 
-                if (!ReferenceEquals(hitInfo, null))
+                if (hitInfo)
                 {
                     hitInfo.collider.GetComponent<StateChange>().OnClick();
                 }
             }
+
+//            if (Input.GetMouseButtonDown(0))
+//            {
+//                var worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
+//                if(Physics2D.Raycast(worldPoint, Vector2.zero, 2f, _layer)){}
+//            }
         }
 
         

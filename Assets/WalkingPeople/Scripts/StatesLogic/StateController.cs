@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace WalkingPeople.Scripts.Units.States
+namespace WalkingPeople.Scripts.StatesLogic
 {
    public abstract class StateController : MonoBehaviour
    {

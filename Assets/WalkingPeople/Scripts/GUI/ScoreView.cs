@@ -1,13 +1,14 @@
 ﻿using TMPro;
 using UnityEngine;
-using WalkingPeople.Scripts.MVC;
-using WalkingPeople.Scripts.MVC.Observer;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
 
 namespace WalkingPeople.Scripts.GUI
 {
     public class ScoreView : MonoBehaviour, IObservable
     {
         [SerializeField] private TextMeshProUGUI Score;
+        
         private GameModel _gameModel;
 
         private void Start()

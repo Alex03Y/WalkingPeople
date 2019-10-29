@@ -1,28 +1,38 @@
-﻿using UnityEngine;
-using WalkingPeople.Scripts.Pool;
+﻿using System;
+using UnityEngine;
+using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.Pool;
 
 namespace WalkingPeople.Scripts.Level
 {
     public class FactoryUnits : MonoBehaviour
     {
-        [SerializeField] private GameObject _unitForvard, _unitDiagonal, _unitFriend;
-        [SerializeField] private int _countUnitForward, _countUnitDiagonal, _countUnitFriend;
+        [SerializeField] private GameObject UnitForvard, UnitDiagonal, UnitFriend;
+        [SerializeField] private int CountUnitForward, CountUnitDiagonal, CountUnitFriend;
+        [SerializeField] private float IndentFromEdges = 0.5f;
 
         private PoolManager _poolManager;
-    
+        private GameModel _gameModel;
+
+        private void Awake()
+        {
+            _gameModel = GameModel.Instance();
+            _gameModel.SetScatter(IndentFromEdges);
+        }
+
         private void Start()
         {
-            _poolManager = PoolManager._instance;
-            _poolManager.CreatePool(_unitForvard, _countUnitForward);
-            _poolManager.CreatePool(_unitDiagonal, _countUnitDiagonal);
-            _poolManager.CreatePool(_unitFriend, _countUnitFriend);
+            _poolManager = PoolManager.instance;
+            _poolManager.CreatePool(UnitForvard, CountUnitForward);
+            _poolManager.CreatePool(UnitDiagonal, CountUnitDiagonal);
+            _poolManager.CreatePool(UnitFriend, CountUnitFriend);
         }
 
         public enum TypeUnit
         {
             MoveForward = 1,
-            MoveForwardAndDiagonal = 2,
-            Friendly = 3
+            MoveForwardAndDiagonal,
+            Friendly
         }
 
         private TypeUnit _typeUnit = TypeUnit.Friendly;
@@ -33,13 +43,13 @@ namespace WalkingPeople.Scripts.Level
             switch (type)
             {
                 case TypeUnit.MoveForward :
-                    unit = _poolManager.InstantiateFromPool(_unitForvard, position);
+                    unit = _poolManager.InstantiateFromPool(UnitForvard, position);
                     break;
                 case TypeUnit.MoveForwardAndDiagonal:
-                    unit = _poolManager.InstantiateFromPool(_unitDiagonal, position);
+                    unit = _poolManager.InstantiateFromPool(UnitDiagonal, position);
                     break;
                 case TypeUnit.Friendly :
-                    unit = _poolManager.InstantiateFromPool(_unitFriend, position);
+                    unit = _poolManager.InstantiateFromPool(UnitFriend, position);
                     break;
             }
 
