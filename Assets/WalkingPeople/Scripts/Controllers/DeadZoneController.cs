@@ -19,6 +19,7 @@ namespace WalkingPeople.Scripts.Controllers
             ConversionPointsToWorld(ref screenPoints);
             ZoneCollider2D.points = new Vector2[] {screenPoints[0], screenPoints[1]};
             _gameModel.SetBorder(screenPoints[1].x, screenPoints[2].y);
+            Debug.Log("x = "+ screenPoints[1].x + " y = " + screenPoints[2].y);
         }
         
         // If player lose

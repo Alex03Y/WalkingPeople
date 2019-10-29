@@ -13,6 +13,7 @@ namespace WalkingPeople.Scripts.Units
         [SerializeField] private float Speed;
         [SerializeField] private float TimeChangeDirection = 1f;
         [SerializeField] private SpriteSheetPlayer PlayerAnimation;
+        [SerializeField] private float Scatter = 0.5f;
         [SerializeField] private Vector3[] Directions = new []
             {new Vector3(0f, -1f, 0f), new Vector3(1f, -1f, 0f), new Vector3(-1f, -1f, 0f)};
 
@@ -30,6 +31,7 @@ namespace WalkingPeople.Scripts.Units
             _poolObject = poolObject;
             _currentDirection = Directions[0];
             _choiceDirection = NextDirection();
+            _borderPosition = _gameModel.RightBorder - Scatter;
         }
 
         private void Update()
@@ -74,7 +76,6 @@ namespace WalkingPeople.Scripts.Units
         
         public void OnReuseObject()
         {
-            _borderPosition = _gameModel.RightBorder;
             Life();
             StartCoroutine(_choiceDirection);
             PlayerAnimation.StartAnimation();

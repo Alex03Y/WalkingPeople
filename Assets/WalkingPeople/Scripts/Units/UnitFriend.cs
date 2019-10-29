@@ -16,6 +16,7 @@ namespace WalkingPeople.Scripts.Units
             {new Vector3(0f, -1f, 0f), new Vector3(-1f, -1f, 0f), new Vector3(1f, -1f, 0f)};
 
         [SerializeField] private SpriteSheetPlayer PlayerAnimation;
+        [SerializeField] private float Scatter = 0.5f;
         private GameModel _gameModel;
         private PoolObject _poolObject;
         private Vector3 _currentDirection;
@@ -30,6 +31,7 @@ namespace WalkingPeople.Scripts.Units
             _poolObject = poolObject;
             _currentDirection = Directions[0];
             _choiceDirection = NextDirection();
+            _borderPosition = _gameModel.RightBorder - Scatter;
         }
 
         private void Update()
@@ -72,7 +74,6 @@ namespace WalkingPeople.Scripts.Units
 
         public void OnReuseObject()
         {
-            _borderPosition = _gameModel.RightBorder;
             Life();
             PlayerAnimation.StartAnimation();
             StartCoroutine(_choiceDirection);
