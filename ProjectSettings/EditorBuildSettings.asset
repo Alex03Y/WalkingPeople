@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/WalkingPeople/Scenes/SampleScene.unity
+    guid: bb47da2fea88e4527a2dca006ddfdb6b
   m_configObjects: {}
