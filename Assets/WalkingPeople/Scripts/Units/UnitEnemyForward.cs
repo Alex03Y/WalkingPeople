@@ -18,13 +18,13 @@ namespace WalkingPeople.Scripts.Units
         public void OnAwake(PoolObject poolObject)
         {
             _gameModel = GameModel.Instance();
-            _state = State.Move;
+            _currentState = State.Move;
             _poolObject = poolObject;
         }
 
         private void Update()
         {
-            switch (_state)
+            switch (_currentState)
             {
                 case State.Move :
                     MoveForward();
@@ -62,7 +62,7 @@ namespace WalkingPeople.Scripts.Units
         public void OnDisposeObject()
         {
             PlayerAnimation.StopAnimation();
-            PoolManager.instance.DisposePoolObject(_poolObject);
+            _poolObject.Destroy();
         }
     }
 }

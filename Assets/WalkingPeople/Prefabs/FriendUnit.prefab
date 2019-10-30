@@ -92,20 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44f7d7f8cbdf41f9a6c314dffd8c2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartNumbertOfAnimation: 1
   _image: {fileID: 4294353741894894046}
   _states:
-  - StateName: ForwardAnimation
-    Sprites:
-    - {fileID: 21300020, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300022, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300024, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300026, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300028, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300030, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300032, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    - {fileID: 21300034, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    AnimationLength: 60
-  - StateName: RightAnimation
+  - StateName: MoveRight
     Sprites:
     - {fileID: 21300038, guid: c32b054e48631415a94f58a65008446b, type: 3}
     - {fileID: 21300040, guid: c32b054e48631415a94f58a65008446b, type: 3}
@@ -115,8 +105,19 @@ MonoBehaviour:
     - {fileID: 21300048, guid: c32b054e48631415a94f58a65008446b, type: 3}
     - {fileID: 21300050, guid: c32b054e48631415a94f58a65008446b, type: 3}
     - {fileID: 21300052, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    AnimationLength: 60
-  - StateName: LeftAnimation
+    AnimationLength: 30
+  - StateName: MoveForward
+    Sprites:
+    - {fileID: 21300020, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300022, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300024, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300026, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300028, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300030, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300032, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    - {fileID: 21300034, guid: c32b054e48631415a94f58a65008446b, type: 3}
+    AnimationLength: 30
+  - StateName: MoveLeft
     Sprites:
     - {fileID: 21300002, guid: c32b054e48631415a94f58a65008446b, type: 3}
     - {fileID: 21300004, guid: c32b054e48631415a94f58a65008446b, type: 3}
@@ -126,7 +127,7 @@ MonoBehaviour:
     - {fileID: 21300012, guid: c32b054e48631415a94f58a65008446b, type: 3}
     - {fileID: 21300014, guid: c32b054e48631415a94f58a65008446b, type: 3}
     - {fileID: 21300016, guid: c32b054e48631415a94f58a65008446b, type: 3}
-    AnimationLength: 60
+    AnimationLength: 30
 --- !u!1 &1974471609696650265
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,8 +139,8 @@ GameObject:
   - component: {fileID: 4406328663454753560}
   - component: {fileID: 8664754718935062282}
   - component: {fileID: 8233713675345060971}
-  - component: {fileID: 4574333563471001527}
   - component: {fileID: 6588641342721359849}
+  - component: {fileID: 2459286057501931612}
   m_Layer: 8
   m_Name: FriendUnit
   m_TagString: Untagged
@@ -201,25 +202,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  TimeChangeDirection: 2
+  TimeChangeDirection: 1
   PlayerAnimation: {fileID: 2596612838289729038}
   Directions:
-  - {x: 0, y: -1, z: 0}
   - {x: 1, y: -1, z: 0}
+  - {x: 0, y: -1, z: 0}
   - {x: -1, y: -1, z: 0}
---- !u!114 &4574333563471001527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974471609696650265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0bc151bf8413446e90d51a0d216e7c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: {fileID: 8233713675345060971}
 --- !u!50 &6588641342721359849
 Rigidbody2D:
   serializedVersion: 4
@@ -241,3 +229,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2459286057501931612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974471609696650265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6e4a078e6c148b791d28d23eb3536e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

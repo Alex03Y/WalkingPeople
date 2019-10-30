@@ -15,33 +15,27 @@ namespace WalkingPeople.Scripts.Units
         [SerializeField] private float TimeChangeDirection = 1f;
         [SerializeField] private SpriteSheetPlayer PlayerAnimation;
         [SerializeField] private Vector3[] Directions = 
-            {new Vector3(0f, -1f, 0f), new Vector3(-1f, -1f, 0f), new Vector3(1f, -1f, 0f)};
+            {new Vector3(1f, -1f, 0f), new Vector3(0f, -1f, 0f), new Vector3(-1f, -1f, 0f)};
        
         private GameModel _gameModel;
         private PoolObject _poolObject;
         private Vector3 _currentDirection;
         private IEnumerator _choiceDirection;
-        private float _scatter, _borderPosition;
+        private float _scatter, _borderPosition, _interpolatedOffset;
 
 
         public void OnAwake(PoolObject poolObject)
         {
             _gameModel = GameModel.Instance();
-            _state = State.Move;
             _poolObject = poolObject;
-            _currentDirection = Directions[0];
-            _choiceDirection = NextDirection();
-        }
-
-        private void Start()
-        {
             _scatter = _gameModel.Scater;
             _borderPosition = _gameModel.RightBorder - _scatter;
+            _interpolatedOffset =  Directions[0].normalized.x * Speed * TimeChangeDirection;
         }
 
-        private void Update()
+       private void Update()
         {
-            switch (_state)
+            switch (_currentState)
             {
                 case State.Move :
                     MoveToDirection();
@@ -65,8 +59,6 @@ namespace WalkingPeople.Scripts.Units
             var nextPosition = new Vector3(currentPosition.x, currentPosition.y, 0f);
             
             nextPosition += Time.deltaTime * Speed * _currentDirection;
-            nextPosition = new Vector3(Mathf.Clamp(nextPosition.x, -_borderPosition, _borderPosition), nextPosition.y,0f); 
-            
             transform.position = nextPosition;
         }
 
@@ -75,25 +67,35 @@ namespace WalkingPeople.Scripts.Units
             while (true)
             {
                 yield return new WaitForSeconds(TimeChangeDirection);
-                
-                var rnd = Random.Range(0, 3);
+                var position = transform.position;
+                int rnd;
+                if (position.x >= _borderPosition - _interpolatedOffset)
+                {
+                    rnd = Random.Range(1, 3);
+                } 
+                else if (position.x <= -_borderPosition + _interpolatedOffset)
+                {
+                    rnd = Random.Range(0, 2);
+                }
+                else rnd = Random.Range(0, 3);
                 _currentDirection = Directions[rnd].normalized;
                 PlayerAnimation.SetState(rnd);
             }
         }
-
+        
         public void OnReuseObject()
         {
             Life();
+            _currentDirection = Directions[1];
+            StartCoroutine(_choiceDirection = NextDirection());
             PlayerAnimation.StartAnimation();
-            StartCoroutine(_choiceDirection);
         }
 
         public void OnDisposeObject()
         {
-            PlayerAnimation.StopAnimation();
             StopCoroutine(_choiceDirection);
-            PoolManager.instance.DisposePoolObject(_poolObject);
+            PlayerAnimation.StopAnimation();
+            _poolObject.Destroy();
         }
     }
 }

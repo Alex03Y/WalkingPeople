@@ -19,7 +19,7 @@ namespace WalkingPeople.Scripts.Controllers
 
                 if (hitInfo)
                 {
-                    hitInfo.collider.GetComponent<StateChange>().OnClick();
+                    hitInfo.collider.GetComponent<StateController>().OnClick();
                 }
             }
 

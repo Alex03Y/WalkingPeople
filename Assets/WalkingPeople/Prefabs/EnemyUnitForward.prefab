@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6230253689836659986}
   - component: {fileID: 4914223760494017925}
   - component: {fileID: 6007861636638647896}
-  - component: {fileID: 380749660654526325}
   - component: {fileID: 2565150311790961207}
+  - component: {fileID: 2429781989904141347}
   m_Layer: 8
   m_Name: EnemyUnitForward
   m_TagString: Untagged
@@ -76,19 +76,6 @@ MonoBehaviour:
   Speed: 5
   Direction: {x: 0, y: -1, z: 0}
   PlayerAnimation: {fileID: 3655834506521761831}
---- !u!114 &380749660654526325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2714355762153971661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0bc151bf8413446e90d51a0d216e7c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: {fileID: 6007861636638647896}
 --- !u!50 &2565150311790961207
 Rigidbody2D:
   serializedVersion: 4
@@ -110,6 +97,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2429781989904141347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714355762153971661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6e4a078e6c148b791d28d23eb3536e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6713092970907629158
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44f7d7f8cbdf41f9a6c314dffd8c2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartNumbertOfAnimation: 0
   _image: {fileID: 4801178117528372731}
   _states:
   - StateName: AnimationForward
@@ -214,4 +214,4 @@ MonoBehaviour:
     - {fileID: 21300030, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300032, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300034, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    AnimationLength: 60
+    AnimationLength: 30

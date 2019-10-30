@@ -7,6 +7,8 @@ namespace WalkingPeople.Scripts.Utilits
 {
     public class SpriteSheetPlayer : MonoBehaviour
     {
+        [SerializeField] private int StartNumbertOfAnimation;
+        
         [Serializable]
         public class PlayerState
         {
@@ -23,7 +25,7 @@ namespace WalkingPeople.Scripts.Utilits
 
         public void StartAnimation()
         {
-            _activeState = _states[0];
+            _activeState = _states[StartNumbertOfAnimation];
 
             // todo: test case
             StartCoroutine(_activeAnimation = StateAnimation());
@@ -32,6 +34,7 @@ namespace WalkingPeople.Scripts.Utilits
         public void StopAnimation()
         {
             if (_activeAnimation != null) StopCoroutine(_activeAnimation);
+            _activeAnimation = null;
         }
 
 
@@ -63,8 +66,8 @@ namespace WalkingPeople.Scripts.Utilits
  
         private IEnumerator StateAnimation()
         {
-            var framesCount = (float) _activeState.Sprites.Length;
-            var delayPerFrames = (_activeState.AnimationLength / framesCount) / 60f; 
+            var framesCount =  _activeState.Sprites.Length * 60f;
+            var delayPerFrames = _activeState.AnimationLength / framesCount; 
  
             while (_activeState != null)
             {

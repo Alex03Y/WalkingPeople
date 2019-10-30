@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6756780452663105944}
   - component: {fileID: 1428748111937210026}
   - component: {fileID: 9185464034363871729}
-  - component: {fileID: 7911529689167204112}
   - component: {fileID: 4534501113962145558}
+  - component: {fileID: 5463945084702764930}
   m_Layer: 8
   m_Name: EnemyUnitDiagonal
   m_TagString: Untagged
@@ -74,25 +74,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  TimeChangeDirection: 2
+  TimeChangeDirection: 1.5
   PlayerAnimation: {fileID: 1018833468809719529}
   Directions:
-  - {x: 0, y: -1, z: 0}
   - {x: 1, y: -1, z: 0}
+  - {x: 0, y: -1, z: 0}
   - {x: -1, y: -1, z: 0}
---- !u!114 &7911529689167204112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3471781293418039486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0bc151bf8413446e90d51a0d216e7c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: {fileID: 9185464034363871729}
 --- !u!50 &4534501113962145558
 Rigidbody2D:
   serializedVersion: 4
@@ -114,6 +101,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5463945084702764930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471781293418039486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6e4a078e6c148b791d28d23eb3536e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7286490484846245942
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,21 +205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44f7d7f8cbdf41f9a6c314dffd8c2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartNumbertOfAnimation: 1
   _image: {fileID: 4724018100090557153}
   _states:
-  - StateName: ForwardAnimation
+  - StateName: MoveRight
     Sprites:
-    - {fileID: 21300020, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300022, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300024, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300026, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300028, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300030, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300032, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    - {fileID: 21300034, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    AnimationLength: 60
-  - StateName: RightAnimation
-    Sprites:
+    - {fileID: 21300036, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300038, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300040, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300042, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
@@ -229,9 +219,22 @@ MonoBehaviour:
     - {fileID: 21300048, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300050, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300052, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    AnimationLength: 60
-  - StateName: LeftAnimation
+    AnimationLength: 30
+  - StateName: MoveForward
     Sprites:
+    - {fileID: 21300018, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300020, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300022, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300024, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300026, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300028, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300030, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300032, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    - {fileID: 21300034, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
+    AnimationLength: 30
+  - StateName: MoveLeft
+    Sprites:
+    - {fileID: 21300000, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300002, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300004, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300006, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
@@ -240,4 +243,4 @@ MonoBehaviour:
     - {fileID: 21300012, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300014, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
     - {fileID: 21300016, guid: a629204837fae4a5cb51f9c9348540f7, type: 3}
-    AnimationLength: 60
+    AnimationLength: 30

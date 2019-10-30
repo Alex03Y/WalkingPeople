@@ -2,22 +2,22 @@
 
 namespace WalkingPeople.Scripts.StatesLogic
 {
-   public abstract class StateController : MonoBehaviour
+   public class StateController : MonoBehaviour
    {
-      protected State _state;
-      public virtual void Life()
+      private protected State _currentState;
+      public void Life()
       {
-         _state = State.Move;
+         _currentState = State.Move;
       }
 
-      public virtual void OnClick()
+      public void OnClick()
       {
-         _state = State.OnClick;
+         _currentState = State.OnClick;
       }
 
-      public virtual void OutOfScreen()
+      public void OutOfScreen()
       {
-         _state = State.OutOfScreen;
+         _currentState = State.OutOfScreen;
       }
    }
 }
