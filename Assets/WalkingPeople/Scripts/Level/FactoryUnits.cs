@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using WalkingPeople.Scripts.Core.MVC;
 using WalkingPeople.Scripts.Core.Pool;
+using WalkingPeople.Scripts.Core.Service;
 
 namespace WalkingPeople.Scripts.Level
 {
@@ -16,13 +16,13 @@ namespace WalkingPeople.Scripts.Level
 
         private void Awake()
         {
-            _gameModel = GameModel.Instance();
+            _gameModel = ServiceLocator.Resolve<GameModel>();
             _gameModel.SetScatter(IndentFromEdges);
         }
 
         private void Start()
         {
-            _poolManager = PoolManager.instance;
+            _poolManager = ServiceLocator.Resolve<PoolManager>();
             _poolManager.CreatePool(UnitForvard, CountUnitForward);
             _poolManager.CreatePool(UnitDiagonal, CountUnitDiagonal);
             _poolManager.CreatePool(UnitFriend, CountUnitFriend);

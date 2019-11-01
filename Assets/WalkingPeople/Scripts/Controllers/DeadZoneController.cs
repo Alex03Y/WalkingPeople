@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using WalkingPeople.Scripts.Core.MVC;
+using WalkingPeople.Scripts.Core.Service;
 using WalkingPeople.Scripts.StatesLogic;
 
 namespace WalkingPeople.Scripts.Controllers
@@ -15,7 +16,7 @@ namespace WalkingPeople.Scripts.Controllers
         //Paint a collider for dead zone;
         private void Awake()
         {
-            _gameModel = GameModel.Instance();
+            _gameModel = ServiceLocator.Resolve<GameModel>();
             _scatter = _gameModel.Scater;
             
             GetPointsScreen(out var screenPoints);

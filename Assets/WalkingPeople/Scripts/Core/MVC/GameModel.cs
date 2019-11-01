@@ -1,10 +1,13 @@
 ﻿using System;
 using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
+using WalkingPeople.Scripts.Core.Service;
 
 namespace WalkingPeople.Scripts.Core.MVC
 {
-    public class GameModel :  Observer
+    public class GameModel :  Observer, IService
     {
+        public Type ServiceType => typeof(GameModel);
+        
         public GameEndResult GameEnd { get; private set; }
         public int CountUnits { get; private set; }
         public int Score { get; private set; }
@@ -12,23 +15,6 @@ namespace WalkingPeople.Scripts.Core.MVC
         public float RightBorder { get; private set; }
         public float TopBorder { get; private set; }
         public float Scater { get; private set; }
-
-        private static GameModel _instance;
-
-        public static GameModel Instance()
-        {
-            if (_instance == null)
-            {
-                _instance = new GameModel();
-            }
-        
-            return _instance;
-        }
-
-        public static void ClearInstance()
-        {
-            _instance = null;
-        }
 
         public void EndGame(bool winner)
         {
@@ -66,5 +52,6 @@ namespace WalkingPeople.Scripts.Core.MVC
         {
             Scater = count;
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using WalkingPeople.Scripts.Core.MVC;
 using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
+using WalkingPeople.Scripts.Core.Service;
 using Random = UnityEngine.Random;
 
 namespace WalkingPeople.Scripts.Level
@@ -19,7 +20,7 @@ namespace WalkingPeople.Scripts.Level
 
         private void Awake()
         {
-            _gameModel = GameModel.Instance();
+            _gameModel = ServiceLocator.Resolve<GameModel>();
             _gameModel.AddObserver(this);
         }
 
@@ -42,10 +43,9 @@ namespace WalkingPeople.Scripts.Level
             for (var i = 0; i < CountUnits; i++)
             {
                 var randomPosition = new Vector3(Random.Range(_leftPoint, _rightPoint), _topPoint, 0f);
-                
-                // I don't know, but if set Range (1, 3), number 3 - never appeared. If maxCount = x, that real maxCount = x-1;
                 int rnd = Random.Range(1, 4);
                 Factory.GetUnit((FactoryUnits.TypeUnit) rnd, randomPosition);
+                
                 yield return new WaitForSeconds(SpawnRate);
             }
         }
@@ -54,7 +54,6 @@ namespace WalkingPeople.Scripts.Level
         {
             StopCoroutine(_coroutineLoop);
             _gameModel.RemoveObservable(this);
-            GameModel.ClearInstance();
         }
 
         public void OnObjectChanged(IObserver observer)

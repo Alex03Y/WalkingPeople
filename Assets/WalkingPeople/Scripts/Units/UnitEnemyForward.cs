@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using WalkingPeople.Scripts.Core.MVC;
 using WalkingPeople.Scripts.Core.Pool;
+using WalkingPeople.Scripts.Core.Service;
 using WalkingPeople.Scripts.StatesLogic;
 using WalkingPeople.Scripts.Utilits;
 
@@ -17,7 +18,7 @@ namespace WalkingPeople.Scripts.Units
         
         public void OnAwake(PoolObject poolObject)
         {
-            _gameModel = GameModel.Instance();
+            _gameModel = ServiceLocator.Resolve<GameModel>();
             _currentState = State.Move;
             _poolObject = poolObject;
         }

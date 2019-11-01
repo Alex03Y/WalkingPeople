@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using WalkingPeople.Scripts.Core.Service;
 
 namespace WalkingPeople.Scripts.Core.Pool
 {
-    public class PoolManager : MonoBehaviour
+    public class PoolManager : MonoBehaviour, IService
     {
-        
-        public static PoolManager instance { get; private set; }
 
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-        }
-
+        public Type ServiceType => typeof(PoolManager);
+       
         private readonly Dictionary<int, Queue<PoolObject>> _poolMap = new Dictionary<int, Queue<PoolObject>>();
     
         public void CreatePool(GameObject prefab, int poolSize)

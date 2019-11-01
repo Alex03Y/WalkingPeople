@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 8664754718935062282}
   - component: {fileID: 8233713675345060971}
   - component: {fileID: 6588641342721359849}
-  - component: {fileID: 2459286057501931612}
   m_Layer: 8
   m_Name: FriendUnit
   m_TagString: Untagged
@@ -229,15 +228,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2459286057501931612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974471609696650265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6e4a078e6c148b791d28d23eb3536e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

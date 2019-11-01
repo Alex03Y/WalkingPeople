@@ -2,6 +2,7 @@
 using UnityEngine;
 using WalkingPeople.Scripts.Core.MVC;
 using WalkingPeople.Scripts.Core.Pool;
+using WalkingPeople.Scripts.Core.Service;
 using WalkingPeople.Scripts.StatesLogic;
 using WalkingPeople.Scripts.Utilits;
 using Random = UnityEngine.Random;
@@ -10,29 +11,29 @@ namespace WalkingPeople.Scripts.Units
 {
     public class UnitEnemyDiagonal : StateController, IPoolObject
     {
-        [SerializeField] private float Speed;
-        [SerializeField] private float TimeChangeDirection = 1f;
-        [SerializeField] private SpriteSheetPlayer PlayerAnimation;
-        [SerializeField] private Vector3[] Directions =
+        [SerializeField] protected float Speed;
+        [SerializeField] protected float TimeChangeDirection = 1f;
+        [SerializeField] protected SpriteSheetPlayer PlayerAnimation;
+        [SerializeField] protected Vector3[] Directions =
             {new Vector3(1f, -1f, 0f),new Vector3(0f, -1f, 0f), new Vector3(-1f, -1f, 0f)};
 
-        private GameModel _gameModel;
-        private PoolObject _poolObject;
-        private Vector3 _currentDirection;
-        private IEnumerator _choiceDirection;
-        private float _scatter, _borderPosition, _interpolatedOffset;
+        protected GameModel _gameModel;
+        protected PoolObject _poolObject;
+        protected Vector3 _currentDirection;
+        protected IEnumerator _choiceDirection;
+        protected float _scatter, _borderPosition, _interpolatedOffset;
 
 
         public void OnAwake(PoolObject poolObject)
         {
-            _gameModel = GameModel.Instance();
+            _gameModel = ServiceLocator.Resolve<GameModel>();
             _poolObject = poolObject;
             _scatter = _gameModel.Scater;
             _borderPosition = _gameModel.RightBorder - _scatter;
             _interpolatedOffset = Directions[0].normalized.x * Speed * TimeChangeDirection;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             switch (_currentState)
             {
@@ -54,7 +55,7 @@ namespace WalkingPeople.Scripts.Units
             }
         }
 
-        private void MoveToDirection()
+        protected void MoveToDirection()
         {
             var currentPosition = transform.position;
             var nextPosition = new Vector3(currentPosition.x, currentPosition.y, 0f);
@@ -62,7 +63,7 @@ namespace WalkingPeople.Scripts.Units
             transform.position = nextPosition;
         }
 
-        private IEnumerator NextDirection()
+        protected IEnumerator NextDirection()
         {
             while (true)
             {

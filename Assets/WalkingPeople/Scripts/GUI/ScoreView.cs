@@ -2,6 +2,7 @@
 using UnityEngine;
 using WalkingPeople.Scripts.Core.MVC;
 using WalkingPeople.Scripts.Core.MVC.ObserverLogic;
+using WalkingPeople.Scripts.Core.Service;
 
 namespace WalkingPeople.Scripts.GUI
 {
@@ -13,7 +14,7 @@ namespace WalkingPeople.Scripts.GUI
 
         private void Start()
         {
-            _gameModel = GameModel.Instance();
+            _gameModel = ServiceLocator.Resolve<GameModel>();
             _gameModel.AddObserver(this);
         }
 
