@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 70370605}
   - component: {fileID: 70370604}
+  - component: {fileID: 70370606}
   m_Layer: 0
   m_Name: BackGround
   m_TagString: Untagged
@@ -186,11 +187,23 @@ Transform:
   m_GameObject: {fileID: 70370603}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 3.200002, y: 3.200002, z: 1}
+  m_LocalScale: {x: 3.2000058, y: 3.2000058, z: 1}
   m_Children: []
   m_Father: {fileID: 603017669}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &70370606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70370603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bd479baa79b455c89c1621791d995c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &109132387
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +329,7 @@ GameObject:
   - component: {fileID: 346546184}
   - component: {fileID: 346546182}
   - component: {fileID: 346546183}
+  - component: {fileID: 346546185}
   m_Layer: 0
   m_Name: DeadZone
   m_TagString: Untagged
@@ -349,8 +363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b160ae27596d461fad28685cbd75433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoneCollider2D: {fileID: 346546184}
-  Camera: {fileID: 519420031}
 --- !u!50 &346546183
 Rigidbody2D:
   serializedVersion: 4
@@ -390,6 +402,23 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.5, y: 0}
   - {x: 0.5, y: 0}
+--- !u!114 &346546185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346546180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8c131b4c50546f896fd0bfc88a54f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zoneCollider2D: {fileID: 346546184}
+  _offsetDeadzone: {x: 0, y: -2}
+  _camera: {fileID: 519420031}
+  ToFitSpriteSize: 0
+  _sprite: {fileID: 70370605}
 --- !u!1 &515969252
 GameObject:
   m_ObjectHideFlags: 0

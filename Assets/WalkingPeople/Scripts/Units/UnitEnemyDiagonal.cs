@@ -28,7 +28,7 @@ namespace WalkingPeople.Scripts.Units
         {
             _gameModel = ServiceLocator.Resolve<GameModel>();
             _poolObject = poolObject;
-            _scatter = _gameModel.Scater;
+            _scatter = _gameModel.IndentFromEdges;
             _borderPosition = _gameModel.RightBorder - _scatter;
             _interpolatedOffset = Directions[0].normalized.x * Speed * TimeChangeDirection;
         }

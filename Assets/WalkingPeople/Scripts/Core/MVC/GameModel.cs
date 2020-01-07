@@ -14,7 +14,7 @@ namespace WalkingPeople.Scripts.Core.MVC
         public int NotMissingUnits { get; private set; }
         public float RightBorder { get; private set; }
         public float TopBorder { get; private set; }
-        public float Scater { get; private set; }
+        public float IndentFromEdges { get; private set; }
 
         public void EndGame(bool winner)
         {
@@ -48,10 +48,11 @@ namespace WalkingPeople.Scripts.Core.MVC
             NotMissingUnits--;
         }
 
-        public void SetScatter(float count)
+        public void SetIndentFromEdges(float count)
         {
-            Scater = count;
+            IndentFromEdges = count;
         }
+
 
     }
 }

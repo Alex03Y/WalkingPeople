@@ -17,7 +17,7 @@ namespace WalkingPeople.Scripts.Level
         private void Awake()
         {
             _gameModel = ServiceLocator.Resolve<GameModel>();
-            _gameModel.SetScatter(IndentFromEdges);
+            _gameModel.SetIndentFromEdges(IndentFromEdges);
         }
 
         private void Start()

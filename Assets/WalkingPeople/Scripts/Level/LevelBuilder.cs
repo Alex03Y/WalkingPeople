@@ -26,7 +26,7 @@ namespace WalkingPeople.Scripts.Level
 
         private void Start()
         {
-            _scatter = _gameModel.Scater;
+            _scatter = _gameModel.IndentFromEdges;
             
             _rightPoint = _gameModel.RightBorder - _scatter;
             _topPoint = _gameModel.TopBorder + _scatter;
