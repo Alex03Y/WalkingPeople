@@ -417,7 +417,7 @@ MonoBehaviour:
   _zoneCollider2D: {fileID: 346546184}
   _offsetDeadzone: {x: 0, y: -2}
   _camera: {fileID: 519420031}
-  ToFitSpriteSize: 0
+  ToFitSpriteSize: 1
   _sprite: {fileID: 70370605}
 --- !u!1 &515969252
 GameObject:
