@@ -9,7 +9,7 @@ public class DeadZoneCreator : MonoBehaviour
     [SerializeField] private Vector2 _offsetDeadzone;
     [SerializeField] private Camera _camera;
     
-    [SerializeField] private bool ToFitSpriteSize;
+    [SerializeField] private bool ToFitSpriteSize = false;
     [SerializeField] private Transform _sprite;
     
 
@@ -23,15 +23,11 @@ public class DeadZoneCreator : MonoBehaviour
         _indentFromEdges = _gameModel.IndentFromEdges;
         if (ToFitSpriteSize) _createDeadZone = CreateDeadZoneToFitSprite;
         else _createDeadZone = CreateDeadZoneToFitScreen;
-    }
-
-    private void Start()
-    {
         var points = _createDeadZone?.Invoke();
         _zoneCollider2D.points = new[] {points[0] + _offsetDeadzone, points[1] + _offsetDeadzone};
         _gameModel.SetBorder(points[1].x, points[2].y);
     }
-
+    
     private Vector2[] CreateDeadZoneToFitScreen()
     {
         GetPointsScreen(out var points);
@@ -53,7 +49,7 @@ public class DeadZoneCreator : MonoBehaviour
             Debug.Log("ritation > 0");
             if (z % 2 <= 0.01f)
             {
-                Debug.Log("ritation sdsd");
+//                Debug.Log("ritation sdsd");
 
                 var value = halfHeight;
                 halfHeight = halfWidth;
